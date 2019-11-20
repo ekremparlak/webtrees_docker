@@ -1,5 +1,5 @@
 FROM alpine
-RUN apk add tar xz php php7-fpm php7-pdo_mysql php-json php-mbstring php-iconv php-session php-xml php-curl php-gd php-simplexml nginx wget php7-pdo_sqlite php7-pdo_odbc php7-pdo_pgsql php7-sqlite3 php-zip &&\
+RUN apk add tar xz php php7-fpm php7-pdo_mysql php-json php-mbstring php-iconv php-session php-xml php-curl php-gd php-simplexml php-fileinfo nginx wget php7-pdo_sqlite php7-pdo_odbc php7-pdo_pgsql php7-sqlite3 php-zip &&\
     wget -P /var/www/ https://github.com/fisharebest/webtrees/archive/master.zip &&\
     unzip /var/www/master.zip -d /var/www/ &&\
     wget https://github.com/fisharebest/webtrees/releases/download/2.0.0-beta.5/webtrees-2.0.0-beta.5.zip &&\
