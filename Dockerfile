@@ -12,6 +12,8 @@ RUN apk add tar xz php php7-fpm php7-pdo_mysql php-json php-mbstring php-iconv p
 RUN mkdir /run/nginx
 COPY default.conf /etc/nginx/conf.d/
 COPY www.conf /etc/php7/php-fpm.d/
+COPY config.ini.php webtrees.sqlite /var/www/webtrees-master/data/
+RUN chown nginx:nginx /var/www/webtrees-master/data/config.ini.php /var/www/webtrees-master/data/webtrees.sqlite
 COPY docker-entrypoint /usr/local/bin/
 EXPOSE 80/tcp
 ENTRYPOINT ["docker-entrypoint"]
