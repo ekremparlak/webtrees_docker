@@ -1,8 +1,8 @@
 FROM php:7.3-fpm-alpine
-RUN apk update && apk add --no-cache nginx wget libzip-dev libxml2-dev libpng-dev unixodbc-dev postgresql-libs postgresql-dev &&\
-    docker-php-ext-install gd pdo_mysql pgsql pdo_pgsql zip &&\
-    docker-php-ext-configure pdo_odbc --with-pdo-odbc=unixODBC,/usr &&\
-    docker-php-ext-install pdo_odbc &&\
+ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/master/install-php-extensions /usr/local/bin/
+RUN apk update && apk add --no-cache nginx wget &&\
+    chmod uga+x /usr/local/bin/install-php-extensions && sync && \
+    install-php-extensions gd pdo_mysql pgsql pdo_pgsql zip pdo_odbc intl &&\
     wget -q https://github.com/fisharebest/webtrees/archive/master.zip &&\
     unzip master.zip -d /var/www/ &&\
     mv /var/www/webtrees*/* /var/www/html/ &&\
@@ -14,7 +14,7 @@ RUN apk update && apk add --no-cache nginx wget libzip-dev libxml2-dev libpng-de
     cp -r webtrees/resources/lang/* /var/www/html/resources/lang &&\
     rm -rf webtrees* master.zip /var/www/webtrees* &&\
     chown -R nginx:nginx /var/www/ &&\
-    apk del wget
+    apk del --purge wget
 RUN mkdir /run/nginx
 RUN rm /usr/local/etc/php-fpm.d/docker.conf /usr/local/etc/php-fpm.d/zz-docker.conf
 COPY default.conf /etc/nginx/conf.d/
