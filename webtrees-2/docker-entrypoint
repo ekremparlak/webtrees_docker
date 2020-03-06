@@ -1,4 +1,8 @@
 #!/bin/sh
 set -e
+if [ ! -f /usr/local/etc/php/conf.d/user.ini ]; then
+    echo max_execution_time = $PHP_MAX_EXE >> /usr/local/etc/php/conf.d/user.ini
+fi
+
 nginx
 php-fpm -F
