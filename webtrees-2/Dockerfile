@@ -1,4 +1,4 @@
-FROM php:7.2-fpm-alpine
+FROM php:7.4-fpm-alpine
 ARG VERSION=2.0.3
 ENV PHP_MAX_EXE 60
 ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/master/install-php-extensions /usr/local/bin/
