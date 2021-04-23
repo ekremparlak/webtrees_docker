@@ -1,7 +1,7 @@
 FROM php:7.4-fpm-alpine
 ARG VERSION=2.0.3
 ENV PHP_MAX_EXE 60
-ADD https://raw.githubusercontent.com/mlocati/docker-php-extension-installer/master/install-php-extensions /usr/local/bin/
+ADD https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 RUN apk update && apk add --no-cache nginx &&\
     chmod uga+x /usr/local/bin/install-php-extensions && sync && \
     install-php-extensions gd pdo_mysql pgsql pdo_pgsql zip pdo_odbc intl exif &&\
