@@ -1,0 +1,21 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  workflow_dispatch:
+
+jobs:
+
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Build fpm-8.0
+      run: docker build php-fpm-8.0 --file Dockerfile --tag webtrees:fpm-8.0
+    - name: Build fpm-7.4
+      run: docker build php-fpm-7.4 --file Dockerfile --tag webtrees:fpm-7.4
