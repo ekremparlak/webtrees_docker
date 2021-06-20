@@ -22,8 +22,8 @@ jobs:
       run: | 
         docker build php-fpm-8.0 -f php-fpm-8.0/Dockerfile \
         --tag ghcr.io/$GITHUB_ACTOR/webtrees_docker:fpm-8.0 \
-        --tag ghcr.io/$GITHUB_ACTOR/webtrees_docker:latest \
-        .
+        --tag ghcr.io/$GITHUB_ACTOR/webtrees_docker:latest
+  
     - name: Docker login
       run: >-
         echo "${{ secrets.GITHUB_TOKEN }}"
