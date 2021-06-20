@@ -29,5 +29,4 @@ jobs:
           fil: php-fpm-8.0/Dockerfile
           push: true
           tags: |
-            docker.pkg.github.com/${{ github.repository }}/webtrees:fpm-8.0
-            docker.pkg.github.com/${{ github.repository }}/webtrees:latest
+            ghcr.io/$GITHUB_ACTOR/webtrees_docker:latest
