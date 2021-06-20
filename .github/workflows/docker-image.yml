@@ -14,8 +14,15 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - name: Build fpm-8.0
-      run: docker build php-fpm-8.0 --file php-fpm-8.0/Dockerfile --tag webtrees:fpm-8.0
-    - name: Build fpm-7.4
-      run: docker build php-fpm-7.4 --file php-fpm-7.4/Dockerfile --tag webtrees:fpm-7.4
+      - name: Log in to GitHub Docker Registry
+        uses: docker/login-action@v1
+        with:
+          registry: docker.pkg.github.com
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Build container image
+        uses: docker/build-push-action@v2
+        with:
+          context: php-fpm-8.0
+          push: true
+          tags: ekremparlak/fpm-8.0
