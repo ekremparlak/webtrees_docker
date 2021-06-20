@@ -3,9 +3,7 @@ name: Docker Image CI
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
-  workflow_dispatch:
+  repository_dispatch:
 
 
 jobs:
@@ -18,12 +16,17 @@ jobs:
     - name: Checkout master
       uses: actions/checkout@v2
 
-    - name: Build
+    - name: Build fpm-8.0
       run: | 
         docker build php-fpm-8.0 -f php-fpm-8.0/Dockerfile \
-        --tag ghcr.io/$GITHUB_ACTOR/webtrees_docker:fpm-8.0 \
-        --tag ghcr.io/$GITHUB_ACTOR/webtrees_docker:latest
-  
+        --tag ghcr.io/$GITHUB_ACTOR/webtrees:fpm-8.0 \
+        --tag ghcr.io/$GITHUB_ACTOR/webtrees:latest
+
+    - name: Build fpm-7.4
+      run: | 
+        docker build php-fpm-7.4 -f php-fpm-7.40/Dockerfile \
+        --tag ghcr.io/$GITHUB_ACTOR/webtrees:fpm-7.4
+
     - name: Docker login
       run: >-
         echo "${{ secrets.GITHUB_TOKEN }}"
@@ -31,5 +34,6 @@ jobs:
       
     - name: Push image to GitHub
       run: |
-        docker push ghcr.io/$GITHUB_ACTOR/webtrees_docker:fpm-8.0
-        docker push ghcr.io/$GITHUB_ACTOR/webtrees_docker:latest
+        docker push ghcr.io/$GITHUB_ACTOR/webtrees:fpm-8.0
+        docker push ghcr.io/$GITHUB_ACTOR/webtrees:latest
+        docker push ghcr.io/$GITHUB_ACTOR/webtrees:fpm-7.4
