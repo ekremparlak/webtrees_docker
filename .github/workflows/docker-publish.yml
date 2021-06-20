@@ -4,7 +4,7 @@ on:
   push:
     branches: [ master ]
   repository_dispatch:
-    types: [opened, deleted]
+    types: [webtrees_update]
 
 
 jobs:
@@ -25,7 +25,7 @@ jobs:
 
     - name: Build fpm-7.4
       run: | 
-        docker build php-fpm-7.4 -f php-fpm-7.40/Dockerfile \
+        docker build php-fpm-7.4 -f php-fpm-7.4/Dockerfile \
         --tag ghcr.io/$GITHUB_ACTOR/webtrees:fpm-7.4
 
     - name: Docker login
