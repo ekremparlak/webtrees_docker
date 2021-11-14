@@ -17,7 +17,7 @@ RUN apk update && apk add --no-cache nginx wget &&\
     chown -R nginx:nginx /var/www/ &&\
     apk del --purge wget
 RUN rm /usr/local/etc/php-fpm.d/docker.conf /usr/local/etc/php-fpm.d/zz-docker.conf
-COPY default.conf /etc/nginx/conf.d/
+COPY default.conf /etc/nginx/http.d/
 COPY docker-entrypoint /usr/local/bin/
 COPY www.conf /usr/local/etc/php-fpm.d/
 EXPOSE 80/tcp
